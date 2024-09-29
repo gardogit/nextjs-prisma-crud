@@ -1,12 +1,20 @@
+"use client";
+import { useEffect, useState } from "react";
 import TaskCard from "../components/TaskCard";
 
-async function loadTask() {
-  const res = await fetch("http://localhost:3000/api/tasks");
-  const data = await res.json();
-  return data;
-}
-async function HomePage() {
-  const tasks = await loadTask();
+function HomePage() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const res = await fetch("/api/tasks");
+      const data = await res.json();
+      setTasks(data);
+    };
+
+    fetchTasks();
+  }, []);
+
   return (
     <section className="container mx-auto">
       <div className="grid grid-cols-3 gap-3 mt-10">
