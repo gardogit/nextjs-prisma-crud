@@ -67,9 +67,26 @@ function NewPage({ params }) {
           value={description}
         ></textarea>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-          Crear
-        </button>
+        <div className="flex justify-between">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            {params.id ? "Modificar" : "Crear"}
+          </button>
+          {params.id && (
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              type="button"
+              onClick={async () => {
+                await fetch(`/api/tasks/${params.id}`, {
+                  method: "DELETE",
+                });
+                router.refresh();
+                router.push("/");
+              }}
+            >
+              Eliminar
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
