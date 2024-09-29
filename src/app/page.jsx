@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import TaskCard from "../components/TaskCard";
+export const dynamic = "force-dynamic";
 
 function HomePage() {
   const [tasks, setTasks] = useState([]);
